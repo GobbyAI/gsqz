@@ -23,7 +23,7 @@ gsqz is a YAML-configurable output compressor for LLM token optimization. It wra
 
 ### Key modules
 
-- **`config.rs`** — Layered config system: built-in `gsqz.yaml` → global (`~/.gobby/gsqz.yaml`) → project (`.gobby/gsqz.yaml`) → CLI override. Custom `Visitor` deserializer for the polymorphic `Step` enum.
+- **`config.rs`** — Layered config system: built-in `config.yaml` → global (`~/.gobby/gsqz.yaml`) → project (`.gobby/gsqz.yaml`) → CLI override. Custom `Visitor` deserializer for the polymorphic `Step` enum.
 - **`compressor.rs`** — Orchestrator that compiles pipeline regexes, matches commands, applies steps, and enforces thresholds (min output length, max compressed lines, 95% savings threshold).
 - **`daemon.rs`** — Feature-gated (`#[cfg(feature = "gobby")]`) HTTP integration with the gobby daemon for runtime config overrides and savings reporting. All HTTP calls are fire-and-forget with 1s timeouts.
 - **`primitives/`** — Four composable operations on line collections:
@@ -34,7 +34,7 @@ gsqz is a YAML-configurable output compressor for LLM token optimization. It wra
 
 ### Config pipeline structure
 
-Pipelines in `gsqz.yaml` match commands via regex and apply ordered steps:
+Pipelines in `config.yaml` match commands via regex and apply ordered steps:
 ```yaml
 pipelines:
   name:

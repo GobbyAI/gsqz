@@ -3,7 +3,7 @@
 # Pipelines are matched against the command string in order.
 # First match wins. Steps run sequentially, each feeding the next.
 #
-# Config resolution: built-in → ~/.gobby/gsqz.yaml → .gobby/gsqz.yaml
+# Config resolution: built-in config.yaml → ~/.gobby/gsqz.yaml → .gobby/gsqz.yaml
 
 settings:
   min_output_length: 1000

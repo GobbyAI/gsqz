@@ -4,7 +4,7 @@ use std::collections::BTreeMap;
 use std::fmt;
 use std::path::{Path, PathBuf};
 
-const DEFAULT_CONFIG: &str = include_str!("../gsqz.yaml");
+const DEFAULT_CONFIG: &str = include_str!("../config.yaml");
 
 #[derive(Debug, Clone, Deserialize)]
 pub struct Config {
@@ -182,7 +182,7 @@ impl Config {
     /// Load config with layered merging: built-in → global → project → CLI override.
     pub fn load(config_override: Option<&Path>) -> Self {
         let mut config: Config =
-            serde_yaml::from_str(DEFAULT_CONFIG).expect("built-in gsqz.yaml is invalid");
+            serde_yaml::from_str(DEFAULT_CONFIG).expect("built-in config.yaml is invalid");
 
         // Layer 2: global config
         if let Some(global_path) = global_config_path() {
@@ -252,7 +252,7 @@ fn global_config_path() -> Option<PathBuf> {
         .ok()
         .map(PathBuf::from)
         .or_else(|| dirs_path(".config"))
-        .map(|p| p.join("gsqz/gsqz.yaml"))
+        .map(|p| p.join("gsqz/config.yaml"))
 }
 
 #[cfg(feature = "gobby")]
