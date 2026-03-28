@@ -102,7 +102,7 @@ gsqz --stats -- pytest tests/
 gsqz --dump-config
 
 # Use a custom config file
-gsqz --config my-gsqz.yaml -- make build
+gsqz --config my-config.yaml -- make build
 ```
 
 ## Configuration
