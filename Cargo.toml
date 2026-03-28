@@ -1,9 +1,15 @@
 [package]
 name = "gsqz"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
+authors = ["Josh Wilhelmi <josh@gobby.ai>"]
 description = "YAML-configurable output compressor for LLM token optimization"
-license = "MIT"
+license = "Apache-2.0"
+repository = "https://github.com/GobbyAI/gsqz"
+homepage = "https://github.com/GobbyAI/gsqz"
+readme = "README.md"
+keywords = ["cli", "compression", "llm", "token-optimization"]
+categories = ["command-line-utilities"]
 
 [features]
 default = ["gobby"]
@@ -24,3 +30,4 @@ serde_json = { version = "1", optional = true }
 opt-level = "z"
 lto = true
 strip = true
+
