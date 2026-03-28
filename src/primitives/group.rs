@@ -629,9 +629,11 @@ mod tests {
             .map(|i| format!("big_file.rs:{}: some match\n", i + 1))
             .collect();
         let result = group_by_file(lines);
-        assert!(result
-            .iter()
-            .any(|l| l.contains("big_file.rs (10 matches)")));
+        assert!(
+            result
+                .iter()
+                .any(|l| l.contains("big_file.rs (10 matches)"))
+        );
         assert!(result.iter().any(|l| l.contains("and 5 more")));
     }
 

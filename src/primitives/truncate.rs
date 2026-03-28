@@ -98,9 +98,11 @@ mod tests {
         }
         let result = truncate(lines, 0, 0, 3, r"^@@\s");
         // Each 6-line section (marker + 5 content) should be truncated to 3
-        assert!(result
-            .iter()
-            .any(|l| l.contains("lines omitted in section")));
+        assert!(
+            result
+                .iter()
+                .any(|l| l.contains("lines omitted in section"))
+        );
     }
 
     #[test]
