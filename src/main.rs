@@ -90,11 +90,11 @@ fn main() {
     // Try to get daemon config overrides
     let mut compressor_config = config.clone();
     let daemon_url = daemon::resolve_daemon_url(config.settings.daemon_url.as_deref());
-    if let Some(ref url) = daemon_url {
-        if let Some((min_length, max_lines)) = daemon::fetch_daemon_config(url) {
-            compressor_config.settings.min_output_length = min_length;
-            compressor_config.settings.max_compressed_lines = max_lines;
-        }
+    if let Some(ref url) = daemon_url
+        && let Some((min_length, max_lines)) = daemon::fetch_daemon_config(url)
+    {
+        compressor_config.settings.min_output_length = min_length;
+        compressor_config.settings.max_compressed_lines = max_lines;
     }
 
     let compressor = Compressor::new(&compressor_config);
@@ -111,15 +111,16 @@ fn main() {
     }
 
     // Report savings to daemon (best-effort)
-    if result.strategy_name != "passthrough" && result.strategy_name != "excluded" {
-        if let Some(ref url) = daemon_url {
-            daemon::report_savings(
-                url,
-                &result.strategy_name,
-                result.original_chars,
-                result.compressed_chars,
-            );
-        }
+    if result.strategy_name != "passthrough"
+        && result.strategy_name != "excluded"
+        && let Some(ref url) = daemon_url
+    {
+        daemon::report_savings(
+            url,
+            &result.strategy_name,
+            result.original_chars,
+            result.compressed_chars,
+        );
     }
 
     let output_str = if result.strategy_name != "passthrough" && result.strategy_name != "excluded"

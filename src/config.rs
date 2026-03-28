@@ -185,17 +185,17 @@ impl Config {
             serde_yaml::from_str(DEFAULT_CONFIG).expect("built-in config.yaml is invalid");
 
         // Layer 2: global config
-        if let Some(global_path) = global_config_path() {
-            if global_path.exists() {
-                merge_from_file(&mut config, &global_path);
-            }
+        if let Some(global_path) = global_config_path()
+            && global_path.exists()
+        {
+            merge_from_file(&mut config, &global_path);
         }
 
         // Layer 3: project config
-        if let Some(project_path) = project_config_path() {
-            if project_path.exists() {
-                merge_from_file(&mut config, &project_path);
-            }
+        if let Some(project_path) = project_config_path()
+            && project_path.exists()
+        {
+            merge_from_file(&mut config, &project_path);
         }
 
         // Layer 4: CLI override
